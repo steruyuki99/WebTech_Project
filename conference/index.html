@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Video Conference</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"crossorigin="anonymous">
+    </head>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+        crossorigin="anonymous">
+    </script>
+
+    <body>
+
+        <div class="position-absolute top-50 start-50 translate-middle">
+            <div class="card" style="width: 20rem;">
+                <div class="card-header text-center">
+                    Login
+                </div>
+                <div class="card-body">
+                    <!-- <form action="http://localhost/videoConference/index.html"> -->
+                        <!--<fieldset> -->
+                            <div class="container">
+                                <div class="row justify-content-around my-4">
+                                    <div class="col">
+                                        <label for="username" class="form-label">Username:</label>
+                                        <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                                    </div>
+                                </div>
+                                <div class="row justify-content-around my-4">
+                                    <div class="col">
+                                        <label for="pass" class="form-label">Password:</label>
+                                        <input type="password" class="form-control" id="pass" placeholder="Enter your password">
+                                    </div>
+                                </div>
+                                <div class="row text-center mt-4 mb-3">
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-secondary" id="login">Register</button>
+                                    </div>
+                                </div>
+                                <div class="row text-center">
+                                    <div class="col">
+                                        Don't have an account?&nbsp&nbsp<a href="register.html">Click Here</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- </fieldset>-->
+                    <!-- </form>  -->
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+          crossorigin="anonymous"
+        ></script>
+        <script
+          src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+          crossorigin="anonymous"
+        ></script>
+    </body>
+
+    <script>
+        document.getElementById("login").addEventListener("click", function() {
+            var username = $("#username").val();
+            var pass = $("#pass").val();
+            
+            $.ajax({
+                type: "POST",
+                url: "api/login",
+                data: {
+                    "username": username,
+                    "pass": pass
+                },
+                dataType: "json",
+                success: function(data, status, xhr) {
+                    alert("Login successful, Current User ID: " + data.id + data.username);
+                    // $.session.set("userID", data.id);
+                    window.location.replace("http://localhost/videoConference/meeting.php");
+                },
+                error: function(data, status, xhr) {
+                    alert("Wrong username or password");
+                }
+            })
+        });
+        // function add(){
+        //     var fullname = $("#fullname").val();
+        //     console.log(fullname);
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "api/addUser",
+        //         data: {
+        //             "fullname": fullname
+        //         },
+        //         dataType: "json",
+        //         success: function(data, status, xhr) {
+        //             alert("Added successful")
+        //         },
+        //         error: function(data, status, xhr) {
+        //             alert(xhr)
+        //         }
+        //     })
+        // }
+        // $(function () {
+
+        //     $("#registerform").submit(function (event) {
+        //         event.preventDefault();
+
+        //         var formData = $(this).serialize();
+        //         var fullname = $("#fullname").val();
+        //         var username = $("#username").val();
+        //         var email = $("#email").val();
+        //         var phone = $("#phone").val();
+        //         var pass = $("#pass").val();
+        //         var gender = $("#gender").val();
+        //         console.log(formData);
+        //         console.log(fullname);
+        //         console.log(username);
+        //         console.log(email);
+        //         console.log(phone);
+        //         console.log(pass);
+        //         console.log(gender);
+
+        //         $.ajax({
+        //             type: "POST",
+        //             url: 'api/addUser',
+        //             data: {
+        //                 "fullname": fullname,
+        //                 "username": username,
+        //                 "email": email,
+        //                 "phone": phone,
+        //                 "pass": pass,
+        //                 "gender": gender
+        //             },
+        //             dataType: "json",
+        //             success: function (data) {
+        //                 alert("Patient Added Successfully");
+        //                 window.location.href = "http://localhost/videoConference";
+        //             },
+        //             error: function () {
+        //                 alert("an error occurred");
+        //             },
+        //         });
+
+        //     });
+        // });
+    </script>
+
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Video Conference</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"crossorigin="anonymous">
+    </head>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+        crossorigin="anonymous">
+    </script>
+
+    <body>
+
+        <div class="position-absolute top-50 start-50 translate-middle">
+            <div class="card" style="width: 50rem;">
+                <div class="card-header text-center">
+                    Registration
+                </div>
+                <div class="card-body">
+                    <!-- <form action="http://localhost/videoConference/index.html"> -->
+                        <!--<fieldset> -->
+                            <div class="container">
+                                <div class="row justify-content-around my-4">
+                                    <div class="col">
+                                        <label for="fullname" class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" id="fullname" placeholder="Enter your name">
+                                    </div>
+                                    <div class="col">
+                                        <label for="username" class="form-label">Username</label>
+                                        <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                                    </div>
+                                </div>
+                                <div class="row justify-content-around my-4">
+                                    <div class="col">
+                                        <label for="email" class="form-label">Email address</label>
+                                        <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                                    </div>
+                                    <div class="col">
+                                        <label for="phone" class="form-label">Phone Number</label>
+                                        <input type="number" class="form-control" id="phone" placeholder="Enter your number">
+                                    </div>
+                                </div>
+                                <div class="row justify-content-around my-4">
+                                    <div class="col">
+                                        <label for="pass" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="pass" placeholder="Enter your password">
+                                    </div>
+                                    <div class="col">
+                                        <label for="confirm" class="form-label">Confirm Password</label>
+                                        <input type="password" class="form-control" id="confirm" placeholder="Confirm your password">
+                                    </div>
+                                </div>
+                                <div class="row justify-content-start my-4">&nbsp;&nbsp;&nbsp;&nbsp;Gender</div>
+                                <div class="row justify-content-start my-4">
+                                    <div class="col-2">
+                                        <input class="form-check-input" type="radio" name="gender" id="gender" value="Male" checked>
+                                        <label class="form-check-label" for="male">Male</label>
+                                    </div>
+                                    <div class="col-2">
+                                        <input class="form-check-input" type="radio" name="gender" id="gender" value="Female">
+                                        <label class="form-check-label" for="female">Female</label>
+                                    </div> 
+                                </div>
+                                <div class="row text-center mt-4 mb-3">
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-secondary" id="add">Register</button>
+                                    </div>
+                                </div>
+                                <div class="row text-center">
+                                    <div class="col">
+                                        Already have an account?&nbsp&nbsp<a href="index.html">Click Here</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- </fieldset>-->
+                    <!-- </form>  -->
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+          crossorigin="anonymous"
+        ></script>
+        <script
+          src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+          crossorigin="anonymous"
+        ></script>
+    </body>
+
+    <script>
+        document.getElementById("add").addEventListener("click", function() {
+            var fullname = $("#fullname").val();
+            var username = $("#username").val();
+            var email = $("#email").val();
+            var phone = $("#phone").val();
+            var pass = $("#pass").val();
+            var gender = $("#gender").val();
+            
+            $.ajax({
+                type: "POST",
+                url: "api/addUser",
+                data: {
+                    "fullname": fullname,
+                    "username": username,
+                    "email": email,
+                    "phone": phone,
+                    "pass": pass,
+                    "gender": gender
+                },
+                dataType: "json",
+                success: function(data, status, xhr) {
+                    alert("Hello");
+                    location.replace("http://localhost/videoConference/login.html");
+                },
+                error: function(data, status, xhr) {
+                    alert(xhr)
+                }
+            })
+        });
+        // function add(){
+        //     var fullname = $("#fullname").val();
+        //     console.log(fullname);
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "api/addUser",
+        //         data: {
+        //             "fullname": fullname
+        //         },
+        //         dataType: "json",
+        //         success: function(data, status, xhr) {
+        //             alert("Added successful")
+        //         },
+        //         error: function(data, status, xhr) {
+        //             alert(xhr)
+        //         }
+        //     })
+        // }
+        // $(function () {
+
+        //     $("#registerform").submit(function (event) {
+        //         event.preventDefault();
+
+        //         var formData = $(this).serialize();
+        //         var fullname = $("#fullname").val();
+        //         var username = $("#username").val();
+        //         var email = $("#email").val();
+        //         var phone = $("#phone").val();
+        //         var pass = $("#pass").val();
+        //         var gender = $("#gender").val();
+        //         console.log(formData);
+        //         console.log(fullname);
+        //         console.log(username);
+        //         console.log(email);
+        //         console.log(phone);
+        //         console.log(pass);
+        //         console.log(gender);
+
+        //         $.ajax({
+        //             type: "POST",
+        //             url: 'api/addUser',
+        //             data: {
+        //                 "fullname": fullname,
+        //                 "username": username,
+        //                 "email": email,
+        //                 "phone": phone,
+        //                 "pass": pass,
+        //                 "gender": gender
+        //             },
+        //             dataType: "json",
+        //             success: function (data) {
+        //                 alert("Patient Added Successfully");
+        //                 window.location.href = "http://localhost/videoConference";
+        //             },
+        //             error: function () {
+        //                 alert("an error occurred");
+        //             },
+        //         });
+
+        //     });
+        // });
+    </script>
+
+</html>
